@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  s3fs:
+    image: flaccid/s3fs
+    environment:
+      AWSACCESSKEYID: ${AWS_ACCESS_KEY_ID}
+      AWSSECRETACCESSKEY: ${AWS_SECRET_ACCESS_KEY}
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - /dev/fuse
+    command: -f -d ${S3_BUCKET} -ourl=${S3_ENDPOINT} /mnt
